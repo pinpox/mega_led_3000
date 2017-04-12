@@ -1,6 +1,7 @@
 
-/*Base unit connected to the LED-strip
-	This arduino receives signals send by the remote and sets the control outputs accordingly*/
+//Base unit connected to the LED-strip
+//This arduino receives signals send by the remote
+//and sets the control outputs accordingly
 
 const int rControl = 2;
 const int gControl = 4;
@@ -28,10 +29,10 @@ void loop()
 
 
 // Set to output pins
-void setValues(values) {
-    analogWrite(rControl, values[0]);
-    analogWrite(gControl, values[1]);
-    analogWrite(bControl, values[2]);
+void setValues(int values[]) {
+				analogWrite(rControl, values[0]);
+				analogWrite(gControl, values[1]);
+				analogWrite(bControl, values[2]);
 }
 
 
@@ -41,17 +42,17 @@ void setValues(values) {
 
 bool getValues(int values[]) {
 
+				int old_values = {};
+				old_values = values;
 
-				//TODO
+				//TODO get values
 				values[0] = 0;
 				values[1] = 0;
 				values[2] = 0;
 
+				if ( old_values[0] == values[0] && old_values[1] == values[1] && old_values[2] == values[2]) {
+								return false;
+				}
+
 				return true;
-
 }
-
-
-
-
-
