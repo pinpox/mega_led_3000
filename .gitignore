@@ -1,3 +1,8 @@
+# Arduino related
+.build_ano
+sch/*.*#*
+*.swp
+
 # Object files
 *.o
 *.ko
