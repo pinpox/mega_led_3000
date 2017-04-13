@@ -1,10 +1,14 @@
 
 #include "SPI.h"
 #include "RF24.h"
-//Base unit connected to the LED-strip
-//This arduino receives signals send by the remote
-//and sets the control outputs accordingly
 
+
+const int rControl = 2;
+const int gControl = 4;
+const int bControl = 8;
+
+int values[3] = {2,2,2};
+byte addresses[][6] = {"1Node","2Node"};
 
 
 /****************** User Config ***************************/
@@ -15,26 +19,27 @@ bool radioNumber = 0;
 RF24 radio(6,7);
 /**********************************************************/
 
-byte addresses[][6] = {"1Node","2Node"};
-
 // Used to control whether this node is sending or receiving
 bool role = 0;
 
+/**
+ * Create a data structure for transmitting and receiving data
+ * This allows many variables to be easily sent and received in a single transmission
+ * See http://www.cplusplus.com/doc/tutorial/structures/
+ */
+struct dataStruct{
+				unsigned long _micros;
+				float value;
+}myData;
 
-
-const int rControl = 2;
-const int gControl = 4;
-const int bControl = 8;
-
-int values[3] = {2,2,2};
-void setup()
-{
+void setup() {
 
 				pinMode(rControl, OUTPUT);
 				pinMode(gControl, OUTPUT);
 				pinMode(bControl, OUTPUT);
+
 				Serial.begin(115200);
-				Serial.println(F("Base unit receive"));
+				Serial.println(F("BASE RF24/examples/GettingStarted_HandlingData"));
 				Serial.println(F("*** PRESS 'T' to begin transmitting to the other node"));
 
 				radio.begin();
@@ -52,14 +57,15 @@ void setup()
 								radio.openReadingPipe(1,addresses[1]);
 				}
 
+				myData.value = 1.22;
 				// Start the radio listening for data
 				radio.startListening();
 }
 
 
 
-void loop()
-{
+
+void loop() {
 
 
 				/****************** Ping Out Role ***************************/
@@ -70,8 +76,8 @@ void loop()
 
 								Serial.println(F("Now sending"));
 
-								unsigned long start_time = micros();                             // Take the time, and send it.  This will block until complete
-								if (!radio.write( &start_time, sizeof(unsigned long) )){
+								myData._micros = micros();
+								if (!radio.write( &myData, sizeof(myData) )){
 												Serial.println(F("failed"));
 								}
 
@@ -90,22 +96,26 @@ void loop()
 								if ( timeout ){                                             // Describe the results
 												Serial.println(F("Failed, response timed out."));
 								}else{
-												unsigned long got_time;                                 // Grab the response, compare, and send to debugging spew
-												radio.read( &got_time, sizeof(unsigned long) );
-												unsigned long end_time = micros();
+												// Grab the response, compare, and send to debugging spew
+												radio.read( &myData, sizeof(myData) );
+												unsigned long time = micros();
 
 												// Spew it
 												Serial.print(F("Sent "));
-												Serial.print(start_time);
+												Serial.print(time);
 												Serial.print(F(", Got response "));
-												Serial.print(got_time);
+												Serial.print(myData._micros);
 												Serial.print(F(", Round-trip delay "));
-												Serial.print(end_time-start_time);
-												Serial.println(F(" microseconds"));
+												Serial.print(time-myData._micros);
+												Serial.print(F(" microseconds Value "));
+												Serial.println(myData.value);
 								}
 
 								// Try again 1s later
 								delay(1000);
+								if ( getValues(values)) {
+												setValues(values);
+								}
 				}
 
 
@@ -114,19 +124,21 @@ void loop()
 
 				if ( role == 0 )
 				{
-								unsigned long got_time;
 
 								if( radio.available()){
 												// Variable for the received timestamp
-												while (radio.available()) {                                   // While there is data ready
-																radio.read( &got_time, sizeof(unsigned long) );             // Get the payload
+												while (radio.available()) {                          // While there is data ready
+																radio.read( &myData, sizeof(myData) );             // Get the payload
 												}
 
-												radio.stopListening();                                        // First, stop listening so we can talk
-												radio.write( &got_time, sizeof(unsigned long) );              // Send the final one back.
-												radio.startListening();                                       // Now, resume listening so we catch the next packets.
+												radio.stopListening();                               // First, stop listening so we can talk
+												myData.value += 0.01;                                // Increment the float value
+												radio.write( &myData, sizeof(myData) );              // Send the final one back.
+												radio.startListening();                              // Now, resume listening so we catch the next packets.
 												Serial.print(F("Sent response "));
-												Serial.println(got_time);
+												Serial.print(myData._micros);
+												Serial.print(F(" : "));
+												Serial.println(myData.value);
 								}
 				}
 
@@ -139,7 +151,7 @@ void loop()
 				{
 								char c = toupper(Serial.read());
 								if ( c == 'T' && role == 0 ){
-												Serial.println(F("*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"));
+												Serial.print(F("*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"));
 												role = 1;                  // Become the primary transmitter (ping out)
 
 								}else
@@ -152,10 +164,9 @@ void loop()
 				}
 
 
-				if ( getValues(values)) {
-								setValues(values);
-				}
-}
+} // Loop
+
+
 
 
 
@@ -187,4 +198,3 @@ bool getValues(int values[]) {
 
 				return true;
 }
-
