@@ -20,46 +20,104 @@
 
 
 
+
+
+
+
+
+.build_ano/uno/RF24/RF24.cpp.o : lib/RF24/RF24.cpp
+	@echo [93mRF24/RF24.cpp[0m
+	@mkdir -p .build_ano/uno/RF24
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c lib/RF24/RF24.cpp
+include .build_ano/uno/RF24/RF24.cpp.d
+
+
+
+
+
+
+
+
+.build_ano/uno/RF24/libRF24.a : .build_ano/uno/RF24/RF24.cpp.o
+	@echo [92mLinking libRF24.a[0m
+	@/usr/bin/avr-ar rcs $@ $^
+
+
+
+
+
+
+
+
+
+
+
+
+
+.build_ano/uno/SPI/src/SPI.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src/SPI.cpp
+	@echo [93mSPI/src/SPI.cpp[0m
+	@mkdir -p .build_ano/uno/SPI/src
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src/SPI.cpp
+include .build_ano/uno/SPI/src/SPI.cpp.d
+
+
+
+
+
+
+
+
+.build_ano/uno/SPI/libSPI.a : .build_ano/uno/SPI/src/SPI.cpp.o
+	@echo [92mLinking libSPI.a[0m
+	@/usr/bin/avr-ar rcs $@ $^
+
+
+
+
+
+
+
+
 .build_ano/uno/arduino/wiring_pulse.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.c
 	@echo [93marduino/wiring_pulse.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.c
 include .build_ano/uno/arduino/wiring_pulse.c.d
 
 .build_ano/uno/arduino/wiring_digital.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_digital.c
 	@echo [93marduino/wiring_digital.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_digital.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_digital.c
 include .build_ano/uno/arduino/wiring_digital.c.d
 
 .build_ano/uno/arduino/wiring.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring.c
 	@echo [93marduino/wiring.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring.c
 include .build_ano/uno/arduino/wiring.c.d
 
 .build_ano/uno/arduino/WInterrupts.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WInterrupts.c
 	@echo [93marduino/WInterrupts.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WInterrupts.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WInterrupts.c
 include .build_ano/uno/arduino/WInterrupts.c.d
 
 .build_ano/uno/arduino/wiring_shift.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_shift.c
 	@echo [93marduino/wiring_shift.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_shift.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_shift.c
 include .build_ano/uno/arduino/wiring_shift.c.d
 
 .build_ano/uno/arduino/wiring_analog.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_analog.c
 	@echo [93marduino/wiring_analog.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_analog.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_analog.c
 include .build_ano/uno/arduino/wiring_analog.c.d
 
 .build_ano/uno/arduino/hooks.c.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/hooks.c
 	@echo [93marduino/hooks.c[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/hooks.c
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino"   -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/hooks.c
 include .build_ano/uno/arduino/hooks.c.d
 
 
@@ -70,103 +128,103 @@ include .build_ano/uno/arduino/hooks.c.d
 .build_ano/uno/arduino/USBCore.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/USBCore.cpp
 	@echo [93marduino/USBCore.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/USBCore.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/USBCore.cpp
 include .build_ano/uno/arduino/USBCore.cpp.d
 
 .build_ano/uno/arduino/WString.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WString.cpp
 	@echo [93marduino/WString.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WString.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WString.cpp
 include .build_ano/uno/arduino/WString.cpp.d
 
 .build_ano/uno/arduino/HardwareSerial0.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial0.cpp
 	@echo [93marduino/HardwareSerial0.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial0.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial0.cpp
 include .build_ano/uno/arduino/HardwareSerial0.cpp.d
 
 .build_ano/uno/arduino/HardwareSerial2.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial2.cpp
 	@echo [93marduino/HardwareSerial2.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial2.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial2.cpp
 include .build_ano/uno/arduino/HardwareSerial2.cpp.d
 
 .build_ano/uno/arduino/IPAddress.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/IPAddress.cpp
 	@echo [93marduino/IPAddress.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/IPAddress.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/IPAddress.cpp
 include .build_ano/uno/arduino/IPAddress.cpp.d
 
 .build_ano/uno/arduino/new.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/new.cpp
 	@echo [93marduino/new.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/new.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/new.cpp
 include .build_ano/uno/arduino/new.cpp.d
 
 .build_ano/uno/arduino/HardwareSerial1.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial1.cpp
 	@echo [93marduino/HardwareSerial1.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial1.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial1.cpp
 include .build_ano/uno/arduino/HardwareSerial1.cpp.d
 
 .build_ano/uno/arduino/abi.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/abi.cpp
 	@echo [93marduino/abi.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/abi.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/abi.cpp
 include .build_ano/uno/arduino/abi.cpp.d
 
 .build_ano/uno/arduino/Print.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Print.cpp
 	@echo [93marduino/Print.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Print.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Print.cpp
 include .build_ano/uno/arduino/Print.cpp.d
 
 .build_ano/uno/arduino/HardwareSerial.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial.cpp
 	@echo [93marduino/HardwareSerial.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial.cpp
 include .build_ano/uno/arduino/HardwareSerial.cpp.d
 
 .build_ano/uno/arduino/HardwareSerial3.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial3.cpp
 	@echo [93marduino/HardwareSerial3.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial3.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/HardwareSerial3.cpp
 include .build_ano/uno/arduino/HardwareSerial3.cpp.d
 
 .build_ano/uno/arduino/Stream.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Stream.cpp
 	@echo [93marduino/Stream.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Stream.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Stream.cpp
 include .build_ano/uno/arduino/Stream.cpp.d
 
 .build_ano/uno/arduino/WMath.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WMath.cpp
 	@echo [93marduino/WMath.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WMath.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WMath.cpp
 include .build_ano/uno/arduino/WMath.cpp.d
 
 .build_ano/uno/arduino/CDC.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/CDC.cpp
 	@echo [93marduino/CDC.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/CDC.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/CDC.cpp
 include .build_ano/uno/arduino/CDC.cpp.d
 
 .build_ano/uno/arduino/PluggableUSB.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/PluggableUSB.cpp
 	@echo [93marduino/PluggableUSB.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/PluggableUSB.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/PluggableUSB.cpp
 include .build_ano/uno/arduino/PluggableUSB.cpp.d
 
 .build_ano/uno/arduino/Tone.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Tone.cpp
 	@echo [93marduino/Tone.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Tone.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Tone.cpp
 include .build_ano/uno/arduino/Tone.cpp.d
 
 .build_ano/uno/arduino/main.cpp.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/main.cpp
 	@echo [93marduino/main.cpp[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/main.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/main.cpp
 include .build_ano/uno/arduino/main.cpp.d
 
 
@@ -177,7 +235,7 @@ include .build_ano/uno/arduino/main.cpp.d
 .build_ano/uno/arduino/wiring_pulse.S.o : /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.S
 	@echo [93marduino/wiring_pulse.S[0m
 	@mkdir -p .build_ano/uno/arduino
-	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -x assembler-with-cpp  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.S
+	@/usr/bin/avr-gcc -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -x assembler-with-cpp  -o $@ -c /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/wiring_pulse.S
 include .build_ano/uno/arduino/wiring_pulse.S.d
 
 
@@ -203,7 +261,7 @@ include .build_ano/uno/arduino/wiring_pulse.S.d
 .build_ano/uno/src/sketch.ino.cpp.o : .build_ano/uno/src/sketch.ino.cpp
 	@echo [93msrc/sketch.ino.cpp[0m
 	@mkdir -p .build_ano/uno/src
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions -iquote src  -o $@ -c .build_ano/uno/src/sketch.ino.cpp
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions -iquote src  -o $@ -c .build_ano/uno/src/sketch.ino.cpp
 include .build_ano/uno/src/sketch.ino.cpp.d
 
 
@@ -220,7 +278,7 @@ include .build_ano/uno/src/sketch.ino.cpp.d
 
 
 
-.build_ano/uno/firmware.elf : .build_ano/uno/src/sketch.ino.cpp.o .build_ano/uno/arduino/libarduino.a
+.build_ano/uno/firmware.elf : .build_ano/uno/src/sketch.ino.cpp.o .build_ano/uno/RF24/libRF24.a .build_ano/uno/SPI/libSPI.a .build_ano/uno/arduino/libarduino.a
 	@echo [92mLinking firmware.elf[0m
 	@/usr/bin/avr-gcc -mmcu=atmega328p -Wl,-Os -Wl,--gc-sections -o $@ $^ -lm
 
@@ -229,7 +287,7 @@ include .build_ano/uno/src/sketch.ino.cpp.d
 	@echo [92mConverting to firmware.hex[0m
 	@/usr/bin/avr-objcopy -O ihex -R .eeprom $^ $@
 
-include .build_ano/uno/src/dependencies.d .build_ano/uno/arduino/dependencies.d
+include .build_ano/uno/src/dependencies.d .build_ano/uno/SPI/dependencies.d .build_ano/uno/arduino/dependencies.d .build_ano/uno/RF24/dependencies.d
 
 all : .build_ano/uno/firmware.hex
 	@true

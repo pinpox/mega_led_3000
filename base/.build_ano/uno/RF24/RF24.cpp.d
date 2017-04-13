@@ -1,6 +1,4 @@
-.build_ano/uno/RF24/RF24.cpp.d .build_ano/uno/RF24/RF24.o: /home/binaryplease/Arduino/libraries/RF24/RF24.cpp \
- /home/binaryplease/Arduino/libraries/RF24/nRF24L01.h \
- /home/binaryplease/Arduino/libraries/RF24/RF24_config.h \
+.build_ano/uno/RF24/RF24.cpp.d .build_ano/uno/RF24/RF24.o: lib/RF24/RF24.cpp lib/RF24/nRF24L01.h lib/RF24/RF24_config.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/binary.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/WCharacter.h \
@@ -13,4 +11,4 @@
  /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard/pins_arduino.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src/SPI.h \
- /home/binaryplease/Arduino/libraries/RF24/RF24.h
+ lib/RF24/RF24.h
