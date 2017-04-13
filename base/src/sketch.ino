@@ -1,200 +1,177 @@
-
-#include "SPI.h"
+#include <SPI.h>
+#include "nRF24L01.h"
 #include "RF24.h"
+#include "printf.h"
 
+//
+// Hardware configuration
+//
 
-const int rControl = 2;
-const int gControl = 4;
-const int bControl = 8;
+// Set up nRF24L01 radio on SPI bus plus pins 9 & 10 (CE & CS)
 
-int values[3] = {2,2,2};
-byte addresses[][6] = {"1Node","2Node"};
-
-
-/****************** User Config ***************************/
-/***      Set this radio as radio number 0 or 1         ***/
-bool radioNumber = 0;
-
-/* Hardware configuration: Set up nRF24L01 radio on SPI bus plus pins 7 & 8 */
 RF24 radio(6,7);
-/**********************************************************/
 
-// Used to control whether this node is sending or receiving
-bool role = 0;
+// Pins on the remote for buttons
+const uint8_t button_pins[] = { 2,3,4	 };
+const uint8_t num_button_pins = sizeof(button_pins);
 
-/**
- * Create a data structure for transmitting and receiving data
- * This allows many variables to be easily sent and received in a single transmission
- * See http://www.cplusplus.com/doc/tutorial/structures/
- */
-struct dataStruct{
-				unsigned long _micros;
-				float value;
-}myData;
+// Pins on the LED board for LED's
+const uint8_t led_pins[] = { 5,9,10 };
+const uint8_t num_led_pins = sizeof(led_pins);
 
-void setup() {
+//
+// Topology
+//
 
-				pinMode(rControl, OUTPUT);
-				pinMode(gControl, OUTPUT);
-				pinMode(bControl, OUTPUT);
+// Single radio pipe address for the 2 nodes to communicate.
+const uint64_t pipe = 0xE8E8F0F0E1LL;
 
-				Serial.begin(115200);
-				Serial.println(F("BASE RF24/examples/GettingStarted_HandlingData"));
-				Serial.println(F("*** PRESS 'T' to begin transmitting to the other node"));
+uint8_t button_states[num_button_pins];
+uint8_t led_states[num_led_pins];
+int led_values[num_led_pins];
 
-				radio.begin();
+//
+// Setup
+//
 
-				// Set the PA Level low to prevent power supply related issues since this is a
-				// getting_started sketch, and the likelihood of close proximity of the devices. RF24_PA_MAX is default.
-				radio.setPALevel(RF24_PA_LOW);
+void setup(void)
+{
 
-				// Open a writing and reading pipe on each radio, with opposite addresses
-				if(radioNumber){
-								radio.openWritingPipe(addresses[1]);
-								radio.openReadingPipe(1,addresses[0]);
-				}else{
-								radio.openWritingPipe(addresses[0]);
-								radio.openReadingPipe(1,addresses[1]);
-				}
+	//
+	// Print preamble
+	//
 
-				myData.value = 1.22;
-				// Start the radio listening for data
-				radio.startListening();
+	Serial.begin(115200);
+	printf_begin();
+	printf("\n\rRF24/examples/led_remote/\n\r");
+	printf("ROLE: BASE");
+
+	//
+	// Setup and configure rf radio
+	//
+
+	radio.begin();
+
+	//
+	// Open pipes to other nodes for communication
+	//
+
+	// This simple sketch opens a single pipes for these two nodes to communicate
+	// back and forth.  One listens on it, the other talks to it.
+
+	radio.openReadingPipe(1,pipe);
+
+	//
+	// Start listening
+	//
+
+	radio.startListening();
+
+	//
+	// Dump the configuration of the rf unit for debugging
+	//
+
+	radio.printDetails();
+
+	//
+	// Set up buttons / LED's
+	//
+
+	// Set pull-up resistors for all buttons
+
+	// Turn LED's ON until we start getting keys
+	int i = num_led_pins;
+	while(i--)
+	{
+		pinMode(led_pins[i],OUTPUT);
+		led_states[i] = HIGH;
+		digitalWrite(led_pins[i],led_states[i]);
+		led_states[i] = 255;
+	}
+
+
+	
+
 }
 
+//
+// Loop
+//
+
+void loop(void)
+{
+
+	//
+	// LED role.  Receive the state of all buttons, and reflect that in the LEDs
+	//
+
+	// if there is data ready
+	if ( radio.available() )
+	{
+		// Dump the payloads until we've gotten everything
+		while (radio.available())
+		{
+			// Fetch the payload, and see if this was the last one.
+			radio.read( button_states, num_button_pins );
+
+			// Spew it
+			printf("Got buttons\n\r");
+			int e =num_button_pins;
 
 
+			while	(e--){
 
-void loop() {
+				Serial.println("Button "+e);
+			Serial.println(button_states[e]);
+			}
 
+			// Increase R brightness
+			if (button_states[0] && led_values[0] < 245) {
+				led_values[0] +=10;
+			Serial.println("R+ pushed, R=");
+				Serial.println(led_values[0]);
 
-				/****************** Ping Out Role ***************************/
-				if (role == 1)  {
+			}
+			// Decrease R Brightness
+			if (button_states[1] && led_values[0] > 11) {
+				led_values[0] -=10;
+				Serial.println("R- pushed, R=");
+				Serial.println(led_values[0]);
+			}
+			// Increase G brightness
+			if (button_states[2] && led_values[1] < 245) {
+				led_values[1] +=10;
+				Serial.println("G+ pushed, G=");
+				Serial.println(led_values[0]);
+			}
+			// Decrease G Brightness
+			if (button_states[3] && led_values[1] > 11) {
+				led_values[1] =-10;
+				Serial.println("G- pushed, G=");
+				Serial.println(led_values[0]);
+			}
+			// Increase B brightness
+			if (button_states[4] && led_values[2] < 245) {
+				led_values[2] +=10;
+				Serial.println("B+ pushed, B=");
+				Serial.println(led_values[0]);
+			}
+			// Decrease B Brightness
+			if (button_states[5]  && led_values[2] > 11) {
+				led_values[2] -=10;
+				Serial.println("B- pushed, B=");
+				Serial.println(led_values[0]);
+			}
 
-								radio.stopListening();                                    // First, stop listening so we can talk.
-
-
-								Serial.println(F("Now sending"));
-
-								myData._micros = micros();
-								if (!radio.write( &myData, sizeof(myData) )){
-												Serial.println(F("failed"));
-								}
-
-								radio.startListening();                                    // Now, continue listening
-
-								unsigned long started_waiting_at = micros();               // Set up a timeout period, get the current microseconds
-								boolean timeout = false;                                   // Set up a variable to indicate if a response was received or not
-
-								while ( ! radio.available() ){                             // While nothing is received
-												if (micros() - started_waiting_at > 200000 ){            // If waited longer than 200ms, indicate timeout and exit while loop
-																timeout = true;
-																break;
-												}
-								}
-
-								if ( timeout ){                                             // Describe the results
-												Serial.println(F("Failed, response timed out."));
-								}else{
-												// Grab the response, compare, and send to debugging spew
-												radio.read( &myData, sizeof(myData) );
-												unsigned long time = micros();
-
-												// Spew it
-												Serial.print(F("Sent "));
-												Serial.print(time);
-												Serial.print(F(", Got response "));
-												Serial.print(myData._micros);
-												Serial.print(F(", Round-trip delay "));
-												Serial.print(time-myData._micros);
-												Serial.print(F(" microseconds Value "));
-												Serial.println(myData.value);
-								}
-
-								// Try again 1s later
-								delay(1000);
-								if ( getValues(values)) {
-												setValues(values);
-								}
-				}
-
-
-
-				/****************** Pong Back Role ***************************/
-
-				if ( role == 0 )
-				{
-
-								if( radio.available()){
-												// Variable for the received timestamp
-												while (radio.available()) {                          // While there is data ready
-																radio.read( &myData, sizeof(myData) );             // Get the payload
-												}
-
-												radio.stopListening();                               // First, stop listening so we can talk
-												myData.value += 0.01;                                // Increment the float value
-												radio.write( &myData, sizeof(myData) );              // Send the final one back.
-												radio.startListening();                              // Now, resume listening so we catch the next packets.
-												Serial.print(F("Sent response "));
-												Serial.print(myData._micros);
-												Serial.print(F(" : "));
-												Serial.println(myData.value);
-								}
-				}
-
-
-
-
-				/****************** Change Roles via Serial Commands ***************************/
-
-				if ( Serial.available() )
-				{
-								char c = toupper(Serial.read());
-								if ( c == 'T' && role == 0 ){
-												Serial.print(F("*** CHANGING TO TRANSMIT ROLE -- PRESS 'R' TO SWITCH BACK"));
-												role = 1;                  // Become the primary transmitter (ping out)
-
-								}else
-												if ( c == 'R' && role == 1 ){
-																Serial.println(F("*** CHANGING TO RECEIVE ROLE -- PRESS 'T' TO SWITCH BACK"));
-																role = 0;                // Become the primary receiver (pong back)
-																radio.startListening();
-
-												}
-				}
-
-
-} // Loop
-
-
-
-
-
-// Set to output pins
-void setValues(int values[]) {
-				analogWrite(rControl, values[0]);
-				analogWrite(gControl, values[1]);
-				analogWrite(bControl, values[2]);
+			// For each button, if the button now on, then toggle the LED
+			int i = num_led_pins;
+			while(i--)
+			{
+					led_states[i] ^= HIGH;
+					//digitalWrite(led_pins[i],led_states[i]);
+					analogWrite(led_pins[i], led_values[i]);
+			}
+		}
+	}
 }
-
-
-//Get Values from receiver. If the control pins have to be set
-//to new values (values changed) true is returned.
-//False otherwise to  skip the refereshing.
-
-bool getValues(int values[]) {
-
-				int old_values[3] = {values[0], values[1], values[2]};
-
-				//TODO get values
-
-				values[0] = 0;
-				values[1] = 0;
-				values[2] = 0;
-
-				if ( old_values[0] == values[0] && old_values[1] == values[1] && old_values[2] == values[2]) {
-								return false;
-				}
-
-				return true;
-}
+// vim:ai:cin:sts=2 sw=2 ft=cpp

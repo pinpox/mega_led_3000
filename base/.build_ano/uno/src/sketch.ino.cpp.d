@@ -11,4 +11,5 @@
  /usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard/pins_arduino.h \
  /usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src/SPI.h \
- lib/RF24/RF24.h lib/RF24/RF24_config.h
+ lib/RF24/nRF24L01.h lib/RF24/RF24.h lib/RF24/RF24_config.h \
+ lib/RF24/printf.h
