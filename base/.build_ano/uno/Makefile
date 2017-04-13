@@ -258,11 +258,11 @@ include .build_ano/uno/arduino/wiring_pulse.S.d
 
 
 
-.build_ano/uno/src/sketch.ino.cpp.o : .build_ano/uno/src/sketch.ino.cpp
-	@echo [93msrc/sketch.ino.cpp[0m
+.build_ano/uno/src/base.ino.cpp.o : .build_ano/uno/src/base.ino.cpp
+	@echo [93msrc/base.ino.cpp[0m
 	@mkdir -p .build_ano/uno/src
-	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions -iquote src  -o $@ -c .build_ano/uno/src/sketch.ino.cpp
-include .build_ano/uno/src/sketch.ino.cpp.d
+	@/usr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=182 -DARDUINO_ARCH_AVR -I/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/archlinux-arduino/avr/variants/standard -I"lib/RF24" -I"lib/RF24/tests" -I"lib/RF24/tests/pingpair_test" -I"lib/RF24/tests/native" -I"lib/RF24/tests/pingpair_blocking" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/libraries/SPI/src" -I"/usr/share/arduino/hardware/archlinux-arduino/avr/cores/arduino" -fno-exceptions -iquote src  -o $@ -c .build_ano/uno/src/base.ino.cpp
+include .build_ano/uno/src/base.ino.cpp.d
 
 
 
@@ -278,7 +278,7 @@ include .build_ano/uno/src/sketch.ino.cpp.d
 
 
 
-.build_ano/uno/firmware.elf : .build_ano/uno/src/sketch.ino.cpp.o .build_ano/uno/RF24/libRF24.a .build_ano/uno/SPI/libSPI.a .build_ano/uno/arduino/libarduino.a
+.build_ano/uno/firmware.elf : .build_ano/uno/src/base.ino.cpp.o .build_ano/uno/RF24/libRF24.a .build_ano/uno/SPI/libSPI.a .build_ano/uno/arduino/libarduino.a
 	@echo [92mLinking firmware.elf[0m
 	@/usr/bin/avr-gcc -mmcu=atmega328p -Wl,-Os -Wl,--gc-sections -o $@ $^ -lm
 
