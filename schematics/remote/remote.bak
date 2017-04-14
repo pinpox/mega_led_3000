@@ -28,7 +28,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:remote-cache
+LIBS:Arduino_Nano-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -297,70 +297,4 @@ Wire Notes Line
 	8450 2850 8450 500 
 Text Notes 9650 1100 0    60   ~ 0
 1
-$Comp
-L Rotary_Encoder_Switch SW?
-U 1 1 58F1372C
-P 1450 2700
-F 0 "SW?" H 1450 2960 50  0000 C CNN
-F 1 "Rotary_Encoder_Switch" H 1450 2440 50  0000 C CNN
-F 2 "" H 1350 2860 50  0001 C CNN
-F 3 "" H 1450 2960 50  0001 C CNN
-	1    1450 2700
-	1    0    0    -1  
-$EndComp
-$Comp
-L Rotary_Encoder_Switch SW?
-U 1 1 58F13932
-P 1450 3450
-F 0 "SW?" H 1450 3710 50  0000 C CNN
-F 1 "Rotary_Encoder_Switch" H 1450 3190 50  0000 C CNN
-F 2 "" H 1350 3610 50  0001 C CNN
-F 3 "" H 1450 3710 50  0001 C CNN
-	1    1450 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Rotary_Encoder_Switch SW?
-U 1 1 58F139C5
-P 1450 4200
-F 0 "SW?" H 1450 4460 50  0000 C CNN
-F 1 "Rotary_Encoder_Switch" H 1450 3940 50  0000 C CNN
-F 2 "" H 1350 4360 50  0001 C CNN
-F 3 "" H 1450 4460 50  0001 C CNN
-	1    1450 4200
-	1    0    0    -1  
-$EndComp
-$Comp
-L LED_CRGB D?
-U 1 1 58F13A4E
-P 2800 2700
-F 0 "D?" H 2800 3070 50  0000 C CNN
-F 1 "LED_CRGB" H 2800 2350 50  0000 C CNN
-F 2 "" H 2800 2650 50  0001 C CNN
-F 3 "" H 2800 2650 50  0001 C CNN
-	1    2800 2700
-	1    0    0    -1  
-$EndComp
-$Comp
-L LED_CRGB D?
-U 1 1 58F13AD1
-P 2800 3600
-F 0 "D?" H 2800 3970 50  0000 C CNN
-F 1 "LED_CRGB" H 2800 3250 50  0000 C CNN
-F 2 "" H 2800 3550 50  0001 C CNN
-F 3 "" H 2800 3550 50  0001 C CNN
-	1    2800 3600
-	1    0    0    -1  
-$EndComp
-$Comp
-L LED_CRGB D?
-U 1 1 58F13B0A
-P 2800 4550
-F 0 "D?" H 2800 4920 50  0000 C CNN
-F 1 "LED_CRGB" H 2800 4200 50  0000 C CNN
-F 2 "" H 2800 4500 50  0001 C CNN
-F 3 "" H 2800 4500 50  0001 C CNN
-	1    2800 4550
-	1    0    0    -1  
-$EndComp
 $EndSCHEMATC
