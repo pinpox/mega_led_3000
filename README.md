@@ -11,7 +11,7 @@ The sourcecode is separted in the respective folders so that it can be build and
 For the 2.4GHz communication the RF24 library is used (https://github.com/nRF24/RF24).
 
 ## Schematic
-![Alt text](images/schematic_base.png?raw=true "Schemaric Base")
+![Alt text](images/schematic_base_img.png?raw=true "Schemaric Base")
 ![Alt text](images/schemaric_remote.png?raw=true "Schemaric Remote")
 
 
