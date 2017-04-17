@@ -9,14 +9,14 @@
 
 // Set up nRF24L01 radio on SPI bus plus pins 9 & 10 (CE & CS)
 
-RF24 radio(6, 7);
+RF24 radio( 7,8);
 
 // Pins on the remote for buttons
 const uint8_t button_pins[] = { 2, 3, 4, 5, 8, 9 };
 const uint8_t num_button_pins = sizeof(button_pins);
 
 // Pins on the LED board for LED's
-const uint8_t led_pins[] = { 5, 9, 10 };
+const uint8_t led_pins[] = { 3, 5, 6 };
 const uint8_t num_led_pins = sizeof(led_pins);
 
 //
@@ -85,8 +85,12 @@ void setup(void)
 	int i = num_led_pins;
 	while (i--) {
 		pinMode(led_pins[i], OUTPUT);
+		digitalWrite(led_pins[i], HIGH);
+		delay(1000);
 		digitalWrite(led_pins[i], LOW);
 	}
+
+
 }
 
 void loop(void)
