@@ -12,7 +12,7 @@ For the 2.4GHz communication the RF24 library is used (https://github.com/nRF24/
 
 ## Schematic
 ![Alt text](images/schematic_base_img.png?raw=true "Schemaric Base")
-![Alt text](images/schemaric_remote.png?raw=true "Schemaric Remote")
+![Alt text](images/schemaric_remote_img.png?raw=true "Schemaric Remote")
 
 
 ## Partlist
@@ -20,12 +20,11 @@ For the 2.4GHz communication the RF24 library is used (https://github.com/nRF24/
 #### Base unit
 - Arduino Uno
 - nRF24L01 2.4 GHz transciever
-- 3x Resistor 220 Ohm
-- 3x LED (red, green, blue)
-- 3x Power Transistor
+- 3x Resistor 440 Ohm
+- 3x TIP120 Transistor
 
 #### Remote
 - Arduino Micro
 - nRF24L01 2.4 GHz transciever
-- 3x RGB-illuminated rotatory encoders
+- 3x EXP-R05-031 RGB-illuminated rotatory encoders
 
