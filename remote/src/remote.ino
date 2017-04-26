@@ -66,7 +66,7 @@ return result;
 RF24 radio(6, 7);
 
 // Pins on the remote for buttons
-const uint8_t button_pins[] = { 2, 3, 4, 5, 8, 9 };
+const uint8_t button_pins[] = { 2, 3, 4};
 const uint8_t num_button_pins = sizeof(button_pins);
 
 // Pins on the LED board for LED's
@@ -87,6 +87,7 @@ const uint64_t pipe = 0xE8E8F0F0E1LL;
 uint8_t button_states[num_button_pins];
 uint8_t led_states[num_led_pins];
 
+uint8_t led_abs_vals[] = {200,200,200};
 //
 // Setup
 //
@@ -135,7 +136,7 @@ void setup(void)
 	int i = num_button_pins;
 	while (i--) {
 		pinMode(button_pins[i], INPUT);
-		digitalWrite(button_pins[i], HIGH);
+		digitalWrite(button_pins[i], LOW);
 	}
 }
 
@@ -165,7 +166,8 @@ void loop(void)
 	// Send the state of the buttons to the LED board
 	if (different) {
 		printf("Now sending...");
-		bool ok = radio.write(button_states, num_button_pins);
+		bool ok = radio.write(led_abs_vals, num_button_pins);
+		//bool ok = radio.write(button_states, num_button_pins);
 		if (ok)
 			printf("ok\n\r");
 		else
