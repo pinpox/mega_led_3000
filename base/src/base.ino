@@ -45,7 +45,6 @@ void setup(void)
 
 	Serial.begin(115200);
 	printf_begin();
-	printf("\n\rRF24/examples/led_remote/\n\r");
 	printf("ROLE: BASE");
 
 	//
@@ -102,9 +101,6 @@ void loop(void)
 			// Fetch the payload, and see if this was the last one.
 			radio.read(button_states, num_button_pins);
 
-			// Read the state of the buttons and adapt the led values
-			readButtonStates();
-
 			//Set the color of the strip
 			setStripColor();
 
@@ -118,56 +114,17 @@ void loop(void)
 // Reads he led_values and sets the color of the encoders accordingly
 void setEncoderColor(){
 
+	//TODO
+
 }
 
 // Set the color of the LED strip according to the current led_values
 void setStripColor(){
 	int i = num_led_pins;
 	while (i--) {
-		analogWrite(led_pins[i], led_values[i]);
+		analogWrite(led_pins[i], button_states[i]);
 	}
 }
 
-// Read the received button state and set the strips color values accordingly
-void readButtonStates(){
-
-	// Increase R brightness
-	if (button_states[0] && led_values[0] <= 250) {
-		led_values[0] += 5;
-		Serial.println("R+ pushed");
-	}
-	// Decrease R Brightness
-	if (button_states[1] && led_values[0] >= 5) {
-		led_values[0] -= 5;
-		Serial.println("R- pushed");
-	}
-	// Increase G brightness
-	if (button_states[2] && led_values[1] <= 250) {
-		led_values[1] += 5;
-		Serial.println("G+ pushed");
-	}
-	// Decrease G Brightness
-	if (button_states[3] && led_values[1] >= 5) {
-		led_values[1] -=5;
-		Serial.println("G- pushed");
-	}
-	// Increase B brightness
-	if (button_states[4] && led_values[2] <= 250) {
-		led_values[2] += 5;
-		Serial.println("B+ pushed");
-	}
-	// Decrease B Brightness
-	if (button_states[5] && led_values[2] >= 5) {
-		led_values[2] -= 5;
-		Serial.println("B- pushed");
-	}
-
-	Serial.print("RGB ");
-	Serial.print(led_values[0]);
-	Serial.print(" ");
-	Serial.print(led_values[1]);
-	Serial.print(" ");
-	Serial.println(led_values[2]);
-}
 
 // vim:ai:cin:sts=2 sw=2 ft=cpp
