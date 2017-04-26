@@ -12,13 +12,11 @@
 RF24 radio( 7,8);
 
 // Pins on the remote for buttons
-const uint8_t button_pins[] = { 2, 3, 4, 5, 8, 9 };
-const uint8_t num_button_pins = sizeof(button_pins);
 
 // Pins on the LED board for LED's
 const uint8_t led_pins[] = { 3, 5, 6 };
-const uint8_t num_led_pins = sizeof(led_pins);
 
+uint8_t led_values[sizeof(led_pins)];
 //
 // Topology
 //
@@ -26,11 +24,7 @@ const uint8_t num_led_pins = sizeof(led_pins);
 // Single radio pipe address for the 2 nodes to communicate.
 const uint64_t pipe = 0xE8E8F0F0E1LL;
 
-uint8_t button_states[num_button_pins];
-int led_values[num_led_pins];
 
-//Colors of the encoders: [encoder number][r,g or b]
-int encoder_colors[num_led_pins][num_led_pins];
 
 //
 // Setup
@@ -81,11 +75,11 @@ void setup(void)
 	// Set pull-up resistors for all buttons
 
 	// Turn LED's ON until we start getting keys
-	int i = num_led_pins;
+	int i = sizeof(led_values);
 	while (i--) {
 		pinMode(led_pins[i], OUTPUT);
 		digitalWrite(led_pins[i], HIGH);
-		delay(1000);
+		delay(600);
 		digitalWrite(led_pins[i], LOW);
 	}
 
@@ -99,32 +93,20 @@ void loop(void)
 		// Dump the payloads until we've gotten everything
 		while (radio.available()) {
 			// Fetch the payload, and see if this was the last one.
-			radio.read(button_states, num_button_pins);
+			radio.read(led_values, sizeof(led_values));
 
 			//Set the color of the strip
 			setStripColor();
-
-			//Set the color of the encoders
-			setEncoderColor();
 		}
 	}
 }
 
-
-// Reads he led_values and sets the color of the encoders accordingly
-void setEncoderColor(){
-
-	//TODO
-
-}
-
 // Set the color of the LED strip according to the current led_values
 void setStripColor(){
-	int i = num_led_pins;
+	int i = sizeof(led_pins);
 	while (i--) {
-		analogWrite(led_pins[i], button_states[i]);
+		analogWrite(led_pins[i], led_values[i]);
 	}
 }
-
 
 // vim:ai:cin:sts=2 sw=2 ft=cpp
